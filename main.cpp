@@ -94,21 +94,6 @@ void QuickSort::begin_benchmark() {
     int elapsedTime;
     bool wasSorted = true;
 
-    m_numsToSort = std::vector<int>(m_Nums);
-    startTime = std::chrono::system_clock::now();
-    std::cout<<"Quicksort: Begin benchmark (pivot = element din partea dreapta)\n";
-    sort(0, m_numsToSort.size() - 1, pivotTypes::pt_Rightest);
-    endTime = std::chrono::system_clock::now();
-    elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
-    wasSorted = verifySort();
-    if(!wasSorted) {
-        std::cout<<"Quicksort: Could not sort\n";
-    }
-    else {
-        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
-    }
-
-
 
     m_numsToSort = std::vector<int>(m_Nums);
     startTime = std::chrono::system_clock::now();
@@ -142,17 +127,30 @@ void QuickSort::begin_benchmark() {
     }
 
 
+    m_numsToSort = std::vector<int>(m_Nums);
+    startTime = std::chrono::system_clock::now();
+    std::cout<<"Quicksort: Begin benchmark (pivot = element din partea dreapta)\n";
+    sort(0, m_numsToSort.size() - 1, pivotTypes::pt_Rightest);
+    endTime = std::chrono::system_clock::now();
+    elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
+    wasSorted = verifySort();
+    if(!wasSorted) {
+        std::cout<<"Quicksort: Could not sort\n";
+    }
+    else {
+        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
+    }
 }
 
 int main() {
-
-    std::ifstream fin("../input.txt");
-    std::ofstream fout("../input.txt");
+    std::ifstream fin("../test1.txt");
+    std::ofstream fout("../test1.txt");
 
     int p = 10000000;
     fout<<p<<'\n';
-    for(int i = 0; i < p; i++) fout<<effolkronium::random_static::get(0, 10000)<<' ';
-
+    for(int i = 0; i < p; i++) {
+        fout<<effolkronium::random_static::get(0, 1000)<<' ';
+    }
 
     int n, nr;
     std::vector<int> nums;
@@ -162,6 +160,8 @@ int main() {
         fin>>nr;
         nums.push_back(nr);
     }
+
+    std::cout<<"Am citit input-ul\n";
 
     QuickSort quickSort(nums);
 

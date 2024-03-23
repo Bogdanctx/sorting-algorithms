@@ -1,0 +1,8 @@
+test1.txt -> 10^7 numere, maximul este 1000 (e dezastru)
+
+Quicksort: Begin benchmark (pivot = random)
+Quicksort: Sorting finished in 510 seconds.
+Quicksort: Begin benchmark (pivot = mediana din 3)
+Quicksort: Sorting finished in 509 seconds.
+Quicksort: Begin benchmark (pivot = element din partea dreapta)
+Quicksort: Sorting finished in 526 seconds.
