@@ -144,13 +144,6 @@ void QuickSort::begin_benchmark() {
 
 int main() {
     std::ifstream fin("../test1.txt");
-    std::ofstream fout("../test1.txt");
-
-    int p = 10000000;
-    fout<<p<<'\n';
-    for(int i = 0; i < p; i++) {
-        fout<<effolkronium::random_static::get(0, 1000)<<' ';
-    }
 
     int n, nr;
     std::vector<int> nums;
