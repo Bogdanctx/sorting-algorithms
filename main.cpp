@@ -2,24 +2,22 @@
 #include <fstream>
 #include <vector>
 #include <chrono>
+
 #include "random.hpp"
-#include <random>
 
 class QuickSort {
 public:
     explicit QuickSort(const std::vector<int> nums) : m_Nums(nums), m_numsToSort(nums) {};
 
-    static int pivotMediana(int left, int right, std::vector<int> &nums);
-    static int pivotRandom(int left, int right, std::vector<int> &nums);
-    static int pivotRightest(int left, int right, std::vector<int> &nums);
+    int partition(int left, int right, std::vector<int> &nums);
 
     void begin_benchmark();
 
 private:
     enum pivotTypes {
-        pt_Mediana = 0,
         pt_Random = 1,
-        pt_Rightest = 2
+        pt_Rightest = 2,
+        pt_Mediana3 = 3
     };
 
     bool verifySort();
@@ -37,136 +35,124 @@ bool QuickSort::verifySort() {
     return true;
 }
 
-int QuickSort::pivotMediana(int left, int right, std::vector<int> &nums) {
-    int a = nums[left], b = nums[(left+right)/2], c = nums[right];
-    int index = std::max(std::min(a,b), std::min(std::max(a,b), c));
-    int pivot = nums[index];
-    int temp = left - 1;
-
-    for(int j = left; j <= right - 1; j++) {
-        if(nums[j] <= pivot) {
-            ++temp;
-            std::swap(nums[temp], nums[j]);
-        }
-    }
-
-    ++temp;
-    std::swap(nums[temp], nums[right]);
-    return temp;
-}
-
-int QuickSort::pivotRightest(int left, int right, std::vector<int> &nums) {
+int QuickSort::partition(int left, int right, std::vector<int> &nums) {
+    int i = left - 1;
     int pivot = nums[right];
-    int temp = left - 1;
 
     for(int j = left; j <= right - 1; j++) {
         if(nums[j] <= pivot) {
-            ++temp;
-            std::swap(nums[temp], nums[j]);
+            ++i;
+            std::swap(nums[i], nums[j]);
         }
     }
 
-    ++temp;
-    std::swap(nums[temp], nums[right]);
-    return temp;
-}
-
-int QuickSort::pivotRandom(int left, int right, std::vector<int> &nums) {
-    int index = left + rand() % (right-left+1);
-    int pivot = nums[index];
-    int temp = left - 1;
-
-    for(int j = left; j <= right - 1; j++) {
-        if(nums[j] <= pivot) {
-            ++temp;
-            std::swap(nums[temp], nums[j]);
-        }
-    }
-
-    ++temp;
-    std::swap(nums[temp], nums[right]);
-    return temp;
+    ++i;
+    std::swap(nums[i], nums[right]);
+    return i;
 }
 
 
 void QuickSort::sort(const int left, const int right, QuickSort::pivotTypes pt) {
-    if(left >= right) {
-        return;
-    }
-    else {
-        int pivot;
+    if(left < right) {
+        int pivotIndex;
 
         switch (pt) {
-            case pivotTypes::pt_Rightest:
-            {
-                pivot = pivotRightest(left, right, m_numsToSort);
-                break;
-            }
             case pivotTypes::pt_Random:
             {
-                pivot = pivotRandom(left, right, m_numsToSort);
+                pivotIndex = left + effolkronium::random_static::get(0, right-left);
+                std::swap(m_numsToSort[right], m_numsToSort[pivotIndex]);
                 break;
             }
-            case pivotTypes::pt_Mediana:
+            case pivotTypes::pt_Mediana3:
             {
-                pivot = pivotMediana(left, right, m_numsToSort);
+                int a = m_numsToSort[left];
+                int b = m_numsToSort[(left+right)/2];
+                int c = m_numsToSort[right];
+
+                int mediana = std::max(std::min(a,b), std::min(std::max(a,b),c));
+
+                if(mediana == a) pivotIndex = left;
+                if(mediana == b) pivotIndex = (left+right)/2;
+                if(mediana == c) pivotIndex = right;
+
+                std::swap(m_numsToSort[right], m_numsToSort[pivotIndex]);
+                break;
+
                 break;
             }
-            default:
-                break;
         }
 
-        sort(left, pivot - 1, pt);
-        sort(pivot + 1, right, pt);
+        int part = partition(left, right, m_numsToSort);
+
+        sort(left, part - 1, pt);
+        sort(part + 1, right, pt);
     }
 }
 
 void QuickSort::begin_benchmark() {
     std::chrono::system_clock::time_point startTime, endTime;
     int elapsedTime;
+    bool wasSorted = true;
 
     m_numsToSort = std::vector<int>(m_Nums);
     startTime = std::chrono::system_clock::now();
-    std::cout<<"Quicksort: Begin benchmark (pivot = numarul cel mai din dreapta)\n";
+    std::cout<<"Quicksort: Begin benchmark (pivot = element din partea dreapta)\n";
     sort(0, m_numsToSort.size() - 1, pivotTypes::pt_Rightest);
     endTime = std::chrono::system_clock::now();
     elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
-    for(int i: m_numsToSort) {
-        std::cout<<i<<' ';
+    wasSorted = verifySort();
+    if(!wasSorted) {
+        std::cout<<"Quicksort: Could not sort\n";
     }
-    std::cout<<'\n';
+    else {
+        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
+    }
+
+
 
     m_numsToSort = std::vector<int>(m_Nums);
     startTime = std::chrono::system_clock::now();
-
     std::cout<<"Quicksort: Begin benchmark (pivot = random)\n";
     sort(0, m_numsToSort.size() - 1, pivotTypes::pt_Random);
     endTime = std::chrono::system_clock::now();
     elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
-
-    for(int i: m_numsToSort) {
-        std::cout<<i<<' ';
+    wasSorted = verifySort();
+    if(!wasSorted) {
+        std::cout<<"Quicksort: Could not sort\n";
+    }
+    else {
+        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
     }
 
-    std::cout<<"\n";
+
+
 
     m_numsToSort = std::vector<int>(m_Nums);
     startTime = std::chrono::system_clock::now();
     std::cout<<"Quicksort: Begin benchmark (pivot = mediana din 3)\n";
-    sort(0, m_numsToSort.size() - 1, pivotTypes::pt_Mediana);
+    sort(0, m_numsToSort.size() - 1, pivotTypes::pt_Mediana3);
     endTime = std::chrono::system_clock::now();
     elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
-    for(int i: m_numsToSort) {
-        std::cout<<i<<' ';
+    wasSorted = verifySort();
+    if(!wasSorted) {
+        std::cout<<"Quicksort: Could not sort\n";
     }
-    std::cout<<'\n';
+    else {
+        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
+    }
 
 
 }
 
 int main() {
-    srand(time(nullptr));
+
     std::ifstream fin("../input.txt");
+    std::ofstream fout("../input.txt");
+
+    int p = 10000000;
+    fout<<p<<'\n';
+    for(int i = 0; i < p; i++) fout<<effolkronium::random_static::get(0, 10000)<<' ';
+
 
     int n, nr;
     std::vector<int> nums;
