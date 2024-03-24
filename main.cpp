@@ -40,6 +40,8 @@ int main() {
 
         std::cout<<"Test #"<<test<< " (" << testInfo[test] << ") benchmarks:\n";
 
+        // Aici punem algoritmii de sortare
+        
         NativeSort nativeSort{nums};
         nativeSort.begin_benchmark();
 
@@ -52,6 +54,9 @@ int main() {
 
         QuickSort quickSort{nums};
         quickSort.begin_benchmark();
+
+
+        ///////////////
 
         std::cout<<"\n\n";
     }
