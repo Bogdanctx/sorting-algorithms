@@ -5,6 +5,7 @@
 #include "QuickSort.h"
 #include "NativeSort.h"
 #include "ShellSort.h"
+#include "RadixSort.h"
 
 int main() {
     const std::vector<std::string> tests = {
@@ -41,7 +42,10 @@ int main() {
         std::cout<<"Test #"<<test<< " (" << testInfo[test] << ") benchmarks:\n";
 
         // Aici punem algoritmii de sortare
-        
+
+        Radix_Sort radixSort{nums};
+        radixSort.begin_benchmark();
+
         NativeSort nativeSort{nums};
         nativeSort.begin_benchmark();
 
