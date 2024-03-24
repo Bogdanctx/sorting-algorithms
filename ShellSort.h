@@ -1,0 +1,30 @@
+//
+// Created by Bogdan on 3/24/2024.
+//
+
+#ifndef SORTING_ALGORITHMS_SHELLSORT_H
+#define SORTING_ALGORITHMS_SHELLSORT_H
+
+#include <iostream>
+#include <vector>
+#include <chrono>
+
+class ShellSort {
+public:
+    explicit ShellSort(const std::vector<int> nums) : m_Nums(nums), m_numsToSort(nums) {};
+
+    void begin_benchmark();
+
+private:
+    void sort();
+    bool verifySort();
+
+    const std::vector<int> m_Nums;
+    std::vector<int> m_numsToSort;
+
+    std::chrono::system_clock::time_point startTime, endTime;
+    int elapsedTime;
+};
+
+
+#endif //SORTING_ALGORITHMS_SHELLSORT_H
