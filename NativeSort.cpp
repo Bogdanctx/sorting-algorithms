@@ -14,9 +14,10 @@ bool NativeSort::verifySort() {
 }
 
 void NativeSort::begin_benchmark() {
+    std::cout<<'\n';
+
     std::chrono::system_clock::time_point startTime, endTime;
     int elapsedTime;
-
     startTime = std::chrono::system_clock::now();
     std::cout<<"Native sort: Begin benchmark\n";
     std::sort(m_numsToSort.begin(), m_numsToSort.end());
@@ -29,4 +30,6 @@ void NativeSort::begin_benchmark() {
     else {
         std::cout<<"Native sort: Sorting finished in " << elapsedTime << " seconds.";
     }
+
+    std::cout<<'\n';
 }

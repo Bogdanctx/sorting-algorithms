@@ -51,36 +51,37 @@ void Radix_Sort::sort(int base) {
 void Radix_Sort::begin_benchmark() {
     bool wasSorted;
 
-
+    std::cout<<'\n';
     m_numsToSort = std::vector<int>(m_Nums);
     startTime = std::chrono::system_clock::now();
-    std::cout<<"\nRadix_Sort: Begin benchmark (base = 10)\n";
+    std::cout<<"Radix_Sort: Begin benchmark (base = 10)\n";
     sort(10);
     endTime = std::chrono::system_clock::now();
     elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
     wasSorted = verifySort();
     if(!wasSorted) {
-        std::cout<<"\nRadix_Sort: Could not sort.";
+        std::cout<<"Radix_Sort: Could not sort.";
     }
     else {
-        std::cout<<"\nRadix_Sort: Sorting finished in " << elapsedTime << " seconds.";
+        std::cout<<"Radix_Sort: Sorting finished in " << elapsedTime << " seconds.";
     }
+    std::cout<<'\n';
 
 
-
-
+    std::cout<<'\n';
     m_numsToSort = std::vector<int>(m_Nums);
     startTime = std::chrono::system_clock::now();
-    std::cout<<"\nRadix_Sort: Begin benchmark (base = 2^16)\n";
+    std::cout<<"Radix_Sort: Begin benchmark (base = 2^16)\n";
     sort(65536);
     endTime = std::chrono::system_clock::now();
     elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
     wasSorted = verifySort();
     if(!wasSorted) {
-        std::cout<<"\nRadix_Sort: Could not sort\n";
+        std::cout<<"Radix_Sort: Could not sort";
     }
     else {
-        std::cout<<"\nRadix_Sort: Sorting finished in " << elapsedTime << " seconds.\n";
+        std::cout<<"Radix_Sort: Sorting finished in " << elapsedTime << " seconds.";
     }
+    std::cout<<'\n';
 
 }

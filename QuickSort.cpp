@@ -91,7 +91,7 @@ void QuickSort::sort(int left, int right, const QuickSort::pivotTypes pt) {
 void QuickSort::begin_benchmark() {
     bool wasSorted;
 
-
+    std::cout<<'\n';
     m_numsToSort = std::vector<int>(m_Nums);
     startTime = std::chrono::system_clock::now();
     std::cout<<"Quicksort: Begin benchmark (pivot = random)\n";
@@ -100,15 +100,14 @@ void QuickSort::begin_benchmark() {
     elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
     wasSorted = verifySort();
     if(!wasSorted) {
-        std::cout<<"Quicksort: Could not sort.";
+        std::cout<<"Quicksort: Could not sort.\n";
     }
     else {
-        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.";
+        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
     }
+    std::cout<<'\n';
 
-
-
-
+    std::cout<<'\n';
     m_numsToSort = std::vector<int>(m_Nums);
     startTime = std::chrono::system_clock::now();
     std::cout<<"Quicksort: Begin benchmark (pivot = mediana din 3)\n";
@@ -122,8 +121,9 @@ void QuickSort::begin_benchmark() {
     else {
         std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
     }
+    std::cout<<'\n';
 
-
+    std::cout<<'\n';
     m_numsToSort = std::vector<int>(m_Nums);
     startTime = std::chrono::system_clock::now();
     std::cout<<"Quicksort: Begin benchmark (pivot = elementul din dreapta)\n";
@@ -137,4 +137,6 @@ void QuickSort::begin_benchmark() {
     else {
         std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
     }
+    std::cout<<'\n';
+
 }

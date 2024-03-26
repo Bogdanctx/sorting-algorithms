@@ -11,12 +11,14 @@ int main() {
     const std::vector<std::string> tests = {
         "../test0.txt",
         "../test1.txt",
-        "../test2.txt"
+        "../test2.txt",
+        "../test3.txt"
     };
     const std::vector<std::string> testInfo = {
         "N=10^8 | max=10^8",
         "N=10^8 | max=10^3",
-        "N=10^3 | max=10^6"
+        "N=10^3 | max=10^6",
+        "N=10^8 | max=10^5, min=-10^5"
     };
 
     int numberOfTests = (int) tests.size();
@@ -39,6 +41,7 @@ int main() {
 
         std::cout<<"Done.\n\n";
 
+        std::cout<<"############################################\n";
         std::cout<<"Test #"<<test<< " (" << testInfo[test] << ") benchmarks:\n";
 
         // Aici punem algoritmii de sortare
@@ -59,9 +62,9 @@ int main() {
         QuickSort quickSort{nums};
         quickSort.begin_benchmark();
 
-
         ///////////////
 
+        std::cout<<"############################################";
         std::cout<<"\n\n";
     }
 
