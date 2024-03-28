@@ -13,17 +13,17 @@ bool Radix_Sort::verifySort() {
     return true;
 }
 
-long long int Radix_Sort::getMax(){
-    long long int max = m_numsToSort[0];
-    for (int i = 1; i < m_numsToSort.size(); i++) {
-        if (m_numsToSort[i] > max) {
-            max = m_numsToSort[i];
+unsigned long long int Radix_Sort::getMax(std::vector<unsigned long long int>& arr){
+    unsigned long long int max = arr[0];
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] > max) {
+            max = arr[i];
         }
     }
     return max;
 }
 
-void Radix_Sort::countingSort(std::vector<long long int>& arr, int base, long long int exp){
+void Radix_Sort::countingSort(std::vector<unsigned long long int>& arr, int base, unsigned long long int exp){
     std::vector<long long int> output(arr.size());
     std::vector<int> count(base, 0);
     for (size_t i = 0; i < arr.size(); i++) {
@@ -42,16 +42,21 @@ void Radix_Sort::countingSort(std::vector<long long int>& arr, int base, long lo
 }
 
 void Radix_Sort::sort(int base) {
-    long long int max = getMax();
-    for (long long int exp = 1; exp != 0 && max / exp > 0; exp *= base) {
-        endTime = std::chrono::system_clock::now();
-        elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
+    std::vector<unsigned long long int> unsigned_arr;
+    for (int num : m_numsToSort) {
+        unsigned_arr.push_back((static_cast<unsigned long long int>(num))^0x8000000000000000);
+    }
 
-        if(elapsedTime >= 65) {
-            return;
-        }
+    unsigned long long int max = getMax(unsigned_arr);
 
-        countingSort(m_numsToSort, base, exp);
+    for (unsigned long long int exp = 1; max / exp > 0; exp *= base) {
+        if(exp)
+            countingSort(unsigned_arr, base, exp);
+        else break;
+    }
+
+    for (size_t i = 0; i < m_numsToSort.size(); i++) {
+        m_numsToSort[i] = static_cast<long long int>((unsigned_arr[i])^0x8000000000000000);
     }
 }
 
