@@ -6,6 +6,8 @@
 #include "NativeSort.h"
 #include "ShellSort.h"
 #include "RadixSort.h"
+#include "HeapSort.h"
+
 #include "random.hpp"
 int main() {
     const std::vector<std::string> tests = {
@@ -37,7 +39,7 @@ int main() {
     const int specialTest = numberOfTests - 1; // testul cu id-ul cel mai mare va fi cel cu float-uri
 
     for(int test = 0; test < numberOfTests; test++) {
-        if(test==3) continue;
+        //if(test==3) continue;
         std::ifstream fin(tests[test]);
         int n;
 
@@ -68,9 +70,6 @@ int main() {
 
         // Aici punem algoritmii de sortare
 
-        Radix_Sort radixSort{nums};
-        radixSort.begin_benchmark();
-
         NativeSort nativeSort{nums};
         nativeSort.begin_benchmark();
 
@@ -85,6 +84,16 @@ int main() {
         quickSort.begin_benchmark();
 
         ///////////////
+
+        std::cout<<'\n';
+
+        HeapSort heapsort{nums};
+        heapsort.begin_benchmark();
+
+        std::cout<<'\n';
+
+        Radix_Sort radixSort{nums};
+        radixSort.begin_benchmark();
 
         std::cout<<"############################################";
         std::cout<<"\n\n";
