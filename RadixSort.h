@@ -13,9 +13,10 @@
 
 class Radix_Sort {
 public:
-    explicit Radix_Sort(const std::vector<int> nums) : m_Nums(nums), m_numsToSort(nums) {};
-    int getMax();
-    void countingSort(std::vector<int> &nums, int base, int exp);
+    explicit Radix_Sort(const std::vector<long long int> &nums) : m_Nums(nums), m_numsToSort(nums) {};
+
+    long long int getMax();
+    void countingSort(std::vector<long long int> &nums, int base, long long int exp);
 
     void begin_benchmark();
 
@@ -23,8 +24,8 @@ private:
 
     bool verifySort();
     void sort(int base);
-    const std::vector<int> m_Nums;
-    std::vector<int> m_numsToSort;
+    const std::vector<long long int> m_Nums;
+    std::vector<long long int> m_numsToSort;
     std::chrono::system_clock::time_point startTime, endTime;
     int elapsedTime;
 };

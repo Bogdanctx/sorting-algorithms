@@ -13,8 +13,8 @@ bool Radix_Sort::verifySort() {
     return true;
 }
 
-int Radix_Sort::getMax(){
-    int max = m_numsToSort[0];
+long long int Radix_Sort::getMax(){
+    long long int max = m_numsToSort[0];
     for (int i = 1; i < m_numsToSort.size(); i++) {
         if (m_numsToSort[i] > max) {
             max = m_numsToSort[i];
@@ -23,8 +23,8 @@ int Radix_Sort::getMax(){
     return max;
 }
 
-void Radix_Sort::countingSort(std::vector<int>& arr, int base, int exp){
-    std::vector<int> output(arr.size());
+void Radix_Sort::countingSort(std::vector<long long int>& arr, int base, long long int exp){
+    std::vector<long long int> output(arr.size());
     std::vector<int> count(base, 0);
     for (size_t i = 0; i < arr.size(); i++) {
         count[(arr[i] / exp) % base]++;
@@ -42,8 +42,15 @@ void Radix_Sort::countingSort(std::vector<int>& arr, int base, int exp){
 }
 
 void Radix_Sort::sort(int base) {
-    int max = getMax();
-    for (long long int exp = 1; max / exp > 0; exp *= base) {
+    long long int max = getMax();
+    for (long long int exp = 1; exp != 0 && max / exp > 0; exp *= base) {
+        endTime = std::chrono::system_clock::now();
+        elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
+
+        if(elapsedTime >= 65) {
+            return;
+        }
+
         countingSort(m_numsToSort, base, exp);
     }
 }
@@ -52,7 +59,7 @@ void Radix_Sort::begin_benchmark() {
     bool wasSorted;
 
     std::cout<<'\n';
-    m_numsToSort = std::vector<int>(m_Nums);
+    m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
     std::cout<<"Radix_Sort: Begin benchmark (base = 10)\n";
     sort(10);
@@ -69,7 +76,7 @@ void Radix_Sort::begin_benchmark() {
 
 
     std::cout<<'\n';
-    m_numsToSort = std::vector<int>(m_Nums);
+    m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
     std::cout<<"Radix_Sort: Begin benchmark (base = 2^16)\n";
     sort(65536);

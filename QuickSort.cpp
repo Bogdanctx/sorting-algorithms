@@ -14,9 +14,9 @@ bool QuickSort::verifySort() {
     return true;
 }
 
-int QuickSort::partition(const int left, const int right, std::vector<int> &nums) {
+int QuickSort::partition(const int left, const int right, std::vector<long long int> &nums) {
     int i = left - 1;
-    int pivot = nums[right];
+    long long int pivot = nums[right];
 
     for(int j = left; j <= right - 1; j++) {
         if(nums[j] <= pivot) {
@@ -48,7 +48,11 @@ void QuickSort::sort(int left, int right, const QuickSort::pivotTypes pt) {
         left = stackTop.first;
         right = stackTop.second;
 
-        int pivotIndex;
+        if(left >= right) {
+            continue;
+        }
+
+        long long int pivotIndex;
 
         switch (pt) {
             case pivotTypes::pt_Random:
@@ -59,11 +63,11 @@ void QuickSort::sort(int left, int right, const QuickSort::pivotTypes pt) {
             }
             case pivotTypes::pt_Mediana3:
             {
-                const int a = m_numsToSort[left];
-                const int b = m_numsToSort[(left+right)/2];
-                const int c = m_numsToSort[right];
+                const long long int a = m_numsToSort[left];
+                const long long int b = m_numsToSort[(left+right)/2];
+                const long long int c = m_numsToSort[right];
 
-                const int mediana = std::max(std::min(a,b), std::min(std::max(a,b),c));
+                const long long int mediana = std::max(std::min(a,b), std::min(std::max(a,b),c));
 
                 if(mediana == a) pivotIndex = left;
                 if(mediana == b) pivotIndex = (left+right)/2;
@@ -79,12 +83,8 @@ void QuickSort::sort(int left, int right, const QuickSort::pivotTypes pt) {
 
         int part = partition(left, right, m_numsToSort);
 
-        if(part - 1 > left) {
-            st.emplace(left, part - 1);
-        }
-        if(part + 1 < right) {
-            st.emplace(part + 1, right);
-        }
+        st.emplace(left, part - 1);
+        st.emplace(part + 1, right);
     }
 }
 
@@ -92,7 +92,7 @@ void QuickSort::begin_benchmark() {
     bool wasSorted;
 
     std::cout<<'\n';
-    m_numsToSort = std::vector<int>(m_Nums);
+    m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
     std::cout<<"Quicksort: Begin benchmark (pivot = random)\n";
     sort(0, (int) m_numsToSort.size() - 1, pivotTypes::pt_Random);
@@ -108,7 +108,7 @@ void QuickSort::begin_benchmark() {
     std::cout<<'\n';
 
     std::cout<<'\n';
-    m_numsToSort = std::vector<int>(m_Nums);
+    m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
     std::cout<<"Quicksort: Begin benchmark (pivot = mediana din 3)\n";
     sort(0, (int) m_numsToSort.size() - 1, pivotTypes::pt_Mediana3);
@@ -124,7 +124,7 @@ void QuickSort::begin_benchmark() {
     std::cout<<'\n';
 
     std::cout<<'\n';
-    m_numsToSort = std::vector<int>(m_Nums);
+    m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
     std::cout<<"Quicksort: Begin benchmark (pivot = elementul din dreapta)\n";
     sort(0, (int) m_numsToSort.size() - 1, pivotTypes::pt_Rightest);

@@ -11,7 +11,7 @@
 
 class ShellSort {
 public:
-    explicit ShellSort(const std::vector<int> nums) : m_Nums(nums), m_numsToSort(nums) {};
+    explicit ShellSort(const std::vector<long long int> &nums) : m_Nums(nums), m_numsToSort(nums) {};
 
     void begin_benchmark();
 
@@ -19,8 +19,8 @@ private:
     void sort();
     bool verifySort();
 
-    const std::vector<int> m_Nums;
-    std::vector<int> m_numsToSort;
+    const std::vector<long long int> m_Nums;
+    std::vector<long long int> m_numsToSort;
 
     std::chrono::system_clock::time_point startTime, endTime;
     int elapsedTime;

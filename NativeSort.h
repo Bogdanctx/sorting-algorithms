@@ -12,14 +12,14 @@
 
 class NativeSort {
 public:
-    explicit NativeSort(const std::vector<int> nums) : m_numsToSort(nums) {};
+    explicit NativeSort(const std::vector<long long int> &nums) : m_numsToSort(nums) {};
 
     void begin_benchmark();
 
 private:
     bool verifySort();
 
-    std::vector<int> m_numsToSort;
+    std::vector<long long int> m_numsToSort;
 };
 
 

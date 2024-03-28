@@ -16,7 +16,7 @@ void ShellSort::sort() {
         }
 
         for(int i = gap; i < n; i++) {
-            int temp = m_numsToSort[i];
+            long long int temp = m_numsToSort[i];
             int j;
 
             for(j = i; j >= gap && m_numsToSort[j-gap] > temp; j -= gap) {
