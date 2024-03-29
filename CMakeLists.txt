@@ -20,4 +20,6 @@ add_executable(sorting-algorithms main.cpp
         RadixIntSort.cpp
         TimSort.h
         TimSort.cpp
+        MergeSortMirror.cpp
+        MergeSortMirror.h
         utilities.h)
