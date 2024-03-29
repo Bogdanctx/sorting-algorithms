@@ -6,16 +6,16 @@
 #include "utilities.h"
 
 
-void TimSort::InsertionSort(unsigned long long left, unsigned long long right)
+void TimSort::InsertionSort(unsigned long long st, unsigned long long dr)
 {
-    for (unsigned long long i = left + 1; i <= right; i++) {
+    for (unsigned long long i = st + 1; i <= dr; i++) {
         long long int temp = m_numsToSort[i];
-        unsigned long long j = i - 1;
-        while (j >= left && m_numsToSort[j] > temp) {
-            m_numsToSort[j+1] = m_numsToSort[j];
+        unsigned long long j = i;
+        while (j > st && m_numsToSort[j-1] > temp) {
+            m_numsToSort[j] = m_numsToSort[j-1];
             j--;
         }
-        m_numsToSort[j+1] = temp;
+        m_numsToSort[j] = temp;
     }
 }
 
@@ -89,7 +89,7 @@ void TimSort::begin_benchmark() {
     sort(m_numsToSort.size());
     endTime = std::chrono::system_clock::now();
     elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
-    bool wasSorted = verifySort();
+    bool wasSorted = Utilities::isSorted(m_numsToSort);
     if(!wasSorted) {
         std::cout<<"TimSort: Could not sort.";
     }
@@ -99,12 +99,3 @@ void TimSort::begin_benchmark() {
     std::cout<<'\n';
 }
 
-bool TimSort::verifySort() {
-    for(int i = 1; i < m_numsToSort.size(); i++) {
-        if(m_numsToSort[i] < m_numsToSort[i-1]) {
-            std::cout << i-1 << " " << i << " " << m_numsToSort[i - 1] << " " << m_numsToSort[i] << std::endl;
-            return false;
-        }
-    }
-    return true;
-}

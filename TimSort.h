@@ -20,7 +20,6 @@ public:
 
 private:
     void sort(unsigned long long n);
-    bool verifySort();
 
     std::vector<long long int> m_numsToSort;
     std::vector<long long int> m_Numscopy;
