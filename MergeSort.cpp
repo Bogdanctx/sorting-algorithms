@@ -4,6 +4,7 @@
 
 
 #include "MergeSort.h"
+#include "utilities.h"
 
 
 void MergeSort::sort(unsigned long long st, unsigned long long dr) {
@@ -18,6 +19,9 @@ void MergeSort::sort(unsigned long long st, unsigned long long dr) {
     unsigned long long i=st;
     while(s<=mij && m <=dr)
     {
+        if(Utilities::isTle(startTime)) {
+            return;
+        }
         if(m_numsToSort[s]>m_numsToSort[m])
         {
             m_Numscopy[i++]=m_numsToSort[m];
@@ -49,7 +53,7 @@ void MergeSort::begin_benchmark() {
     std::cout<<'\n';
     startTime = std::chrono::system_clock::now();
     std::cout<<"MergeSort: Begin benchmark\n";
-    sort(0, getn() - 1);
+    sort(0, m_numsToSort.size() - 1);
     endTime = std::chrono::system_clock::now();
     elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
     bool wasSorted = verifySort();

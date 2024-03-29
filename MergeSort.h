@@ -18,10 +18,6 @@ public:
     explicit MergeSort(const std::vector<long long int>& nums) : m_numsToSort(nums), m_Numscopy(nums) {};
 
     void begin_benchmark();
-    unsigned long long getn()
-    {
-        return m_numsToSort.size();
-    };
 
 private:
     void sort(unsigned long long st, unsigned long long dr);
