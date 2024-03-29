@@ -24,6 +24,7 @@ public:
         long long int n = nums.size();
         for(long long int i = 1; i < n; i++) {
             if(nums[i] < nums[i-1]) {
+                std::cout << "At pos "<< i-1 << " value is " << nums[i - 1]<< " and at pos " << i << " value is "  << nums[i] << std::endl;
                 return false;
             }
         }
