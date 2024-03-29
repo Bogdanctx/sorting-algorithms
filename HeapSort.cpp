@@ -3,7 +3,7 @@
 //
 
 #include "HeapSort.h"
-
+#include "utilities.h"
 
 bool HeapSort::verifySort() {
     for(int i = 1; i < m_numsToSort.size(); i++) {
@@ -14,6 +14,10 @@ bool HeapSort::verifySort() {
     return true;
 }
 void HeapSort::heapify_down(int i, int n) {
+    if(Utilities::isTle(startTime)) {
+        return;
+    }
+
     int largest = i;
     int left_child = 2 * i + 1;
     int right_child = 2 * i + 2;
@@ -36,8 +40,13 @@ void HeapSort::heapify_down(int i, int n) {
 void HeapSort::build_max_heap() {
     int n = m_numsToSort.size();
     // Start from the last non-leaf node
-    for (int i = n / 2 - 1; i >= 0; i--)
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        if(Utilities::isTle(startTime)) {
+            return;
+        }
+
         heapify_down(i, n);
+    }
 }
 
 void HeapSort::sort(){
@@ -46,6 +55,10 @@ void HeapSort::sort(){
     int n = m_numsToSort.size();
     // Extract elements from the heap in sorted order
     for (int i = n - 1; i > 0; i--) {
+        if(Utilities::isTle(startTime)) {
+            return;
+        }
+
         std::swap(m_numsToSort[0], m_numsToSort[i]); // Move current root to end
         heapify_down(0, i); // Max heapify the reduced heap
     }
@@ -53,13 +66,18 @@ void HeapSort::sort(){
 
 void HeapSort::begin_benchmark() {
     bool wasSorted;
+
     std::cout<<"\n";
+
     startTime = std::chrono::system_clock::now();
+
     std::cout<<"HeapSort: Begin benchmark\n";
+
     sort();
-    endTime = std::chrono::system_clock::now();
-    elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
+
+    elapsedTime =
     wasSorted = verifySort();
+
     if(!wasSorted) {
         std::cout<<"HeapSort: Could not sort.";
     }

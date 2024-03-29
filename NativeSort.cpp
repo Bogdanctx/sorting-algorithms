@@ -3,6 +3,7 @@
 //
 
 #include "NativeSort.h"
+#include "utilities.h"
 
 bool NativeSort::verifySort() {
     for(int i = 1; i < m_numsToSort.size(); i++) {
@@ -16,14 +17,15 @@ bool NativeSort::verifySort() {
 void NativeSort::begin_benchmark() {
     std::cout<<'\n';
 
-    std::chrono::system_clock::time_point startTime, endTime;
-    int elapsedTime;
     startTime = std::chrono::system_clock::now();
+
     std::cout<<"Native sort: Begin benchmark\n";
+
     std::sort(m_numsToSort.begin(), m_numsToSort.end());
-    endTime = std::chrono::system_clock::now();
-    elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
+
+    elapsedTime = Utilities::getElapsedSeconds(startTime);
     bool wasSorted = verifySort();
+
     if(!wasSorted) {
         std::cout<<"Native sort: Could not sort.";
     }

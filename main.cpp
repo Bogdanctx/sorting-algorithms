@@ -13,13 +13,13 @@
 #include "random.hpp"
 
 int main() {
-    const std::vector<std::string> tests = {
-        "../test0.txt",
-        "../test1.txt",
-        "../test2.txt",
-        "../test3.txt",
-        "../test4.txt",
-        "../test5.txt"
+    // (size, nr_minim, nr_maxim)
+    const std::vector<std::vector<long long int>> tests = {
+            {100000000, 0, 100000000}, // N=10^8, min = 0, max=10^8
+            {100000000, 0, 1000}, // N=10^8, min = 0, max=10^3
+            {1000, 0, 1000000}, // N=10^3, min = 0, max=10^6
+            {100000000, -100000, 100000}, // N=10^8, min=-10^5, max=10^5
+            {100000000, 0, 1000000000000}, // N=10^8, min=0, max=10^12
     };
     const std::vector<std::string> testInfo = {
         "N=10^8 | max=10^8",
@@ -27,44 +27,24 @@ int main() {
         "N=10^3 | max=10^6",
         "N=10^8 | max=10^5, min=-10^5",
         "N=10^8 | max=10^12",
-        "TO DO"
     };
-
-    /*std::ofstream fout(tests[4]);
-    int p = 100000000;
-    fout<<p<<'\n';
-    for(int i = 0; i < p; i++) {
-        fout<<effolkronium::random_static::get((long long int)0, (long long int)1000000000000)<<' ';
-    }
-    return 0;*/
 
     int numberOfTests = (int) tests.size();
     const int specialTest = numberOfTests - 1; // testul cu id-ul cel mai mare va fi cel cu float-uri
 
     for(int test = 0; test < numberOfTests; test++) {
-        //if(test==3) continue;
-        std::ifstream fin(tests[test]);
-        int n;
 
-        std::cout<<"Reading " << tests[test] << " input.\n";
+        int n = tests[test][0];
+        long long int lowerBound = tests[test][1];
+        long long int upperBound = tests[test][2];
 
-        fin>>n;
         std::vector<long long int>nums(n);
 
-        if(test == specialTest) {
-            for(int i = 0; i < n; i++) {
-                double nr;
-                fin>>nr;
-                nums[i] = *reinterpret_cast<long long int*>(&nr);
-            }
-        }
-        else {
-            for(int i = 0; i < n; i++) {
-                fin>>nums[i];
-            }
-        }
+        std::cout<<"Creating test #" << test << " input\n";
 
-        fin.close();
+        for(int p = 0; p < n; p++) {
+            nums[p] = effolkronium::random_static::get(lowerBound, upperBound);
+        }
 
         std::cout<<"Done.\n\n";
 
@@ -73,6 +53,12 @@ int main() {
 
         // Aici punem algoritmii de sortare
 
+        QuickSort quickSort{nums};
+        quickSort.begin_benchmark();
+
+        std::cout<<'\n';
+
+
         NativeSort nativeSort{nums};
         nativeSort.begin_benchmark();
 
@@ -80,11 +66,6 @@ int main() {
 
         ShellSort shellSort{nums};
         shellSort.begin_benchmark();
-
-        std::cout<<'\n';
-
-        QuickSort quickSort{nums};
-        quickSort.begin_benchmark();
 
         ///////////////
 

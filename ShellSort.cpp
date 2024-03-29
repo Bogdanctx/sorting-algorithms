@@ -3,15 +3,12 @@
 //
 
 #include "ShellSort.h"
+#include "utilities.h"
 
 void ShellSort::sort() {
     int n = m_numsToSort.size();
     for(int gap = n / 2; gap > 0; gap = gap / 2) {
-
-        endTime = std::chrono::system_clock::now();
-        elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
-
-        if(elapsedTime >= 65) {
+        if(Utilities::isTle(startTime)) {
             return;
         }
 
@@ -30,11 +27,15 @@ void ShellSort::sort() {
 
 void ShellSort::begin_benchmark() {
     std::cout<<'\n';
+
     startTime = std::chrono::system_clock::now();
+
     std::cout<<"Shellsort: Begin benchmark\n";
+
     sort();
-    endTime = std::chrono::system_clock::now();
-    elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
+
+    elapsedTime = Utilities::getElapsedSeconds(startTime);
+
     bool wasSorted = verifySort();
     if(!wasSorted) {
         std::cout<<"Shellsort: Could not sort.";
@@ -42,6 +43,7 @@ void ShellSort::begin_benchmark() {
     else {
         std::cout<<"Shellsort: Sorting finished in " << elapsedTime << " seconds.";
     }
+
     std::cout<<'\n';
 }
 

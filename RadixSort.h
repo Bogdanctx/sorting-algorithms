@@ -25,7 +25,7 @@ private:
     void sort(int base);
     const std::vector<long long int> m_Nums;
     std::vector<long long int> m_numsToSort;
-    std::chrono::system_clock::time_point startTime, endTime;
+    std::chrono::system_clock::time_point startTime;
     int elapsedTime;
 };
 

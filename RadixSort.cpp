@@ -3,6 +3,7 @@
 //
 
 #include "RadixSort.h"
+#include "utilities.h"
 
 bool Radix_Sort::verifySort() {
     for(int i = 1; i < m_numsToSort.size(); i++) {
@@ -50,8 +51,13 @@ void Radix_Sort::sort(int base) {
     unsigned long long int max = getMax(unsigned_arr);
 
     for (unsigned long long int exp = 1; max / exp > 0; exp *= base) {
-        if(exp)
+        if(exp) {
+            if(Utilities::isTle(startTime)) {
+                return;
+            }
+
             countingSort(unsigned_arr, base, exp);
+        }
         else break;
     }
 
@@ -64,13 +70,17 @@ void Radix_Sort::begin_benchmark() {
     bool wasSorted;
 
     std::cout<<'\n';
+
     m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
+
     std::cout<<"Radix_Sort: Begin benchmark (base = 10)\n";
+
     sort(10);
-    endTime = std::chrono::system_clock::now();
-    elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
+
+    elapsedTime = Utilities::getElapsedSeconds(startTime);
     wasSorted = verifySort();
+
     if(!wasSorted) {
         std::cout<<"Radix_Sort: Could not sort.";
     }
@@ -83,19 +93,24 @@ void Radix_Sort::begin_benchmark() {
 
 
     std::cout<<'\n';
+
     m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
+
     std::cout<<"Radix_Sort: Begin benchmark (base = 2^16)\n";
+
     sort(65536);
-    endTime = std::chrono::system_clock::now();
-    elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
+
+    elapsedTime = Utilities::getElapsedSeconds(startTime);
     wasSorted = verifySort();
+
     if(!wasSorted) {
         std::cout<<"Radix_Sort: Could not sort";
     }
     else {
         std::cout<<"Radix_Sort: Sorting finished in " << elapsedTime << " seconds.";
     }
+
     std::cout<<'\n';
 
 }
