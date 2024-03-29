@@ -18,18 +18,18 @@ void BottomUpMergeSortAlternateVectors::sort() {
     }
     for (unsigned long long size = 1; size < n; size = 2 * size) {
 
-        for (st = 0; st < n; st += 2 * size) {
+        if(reps%2==0) {
+            for (st = 0; st < n; st += 2 * size) {
 
-            mij = st + size - 1;
-            dr = std::min((st + 2 * size - 1), (n-1));
+                mij = st + size - 1;
+                dr = std::min((st + 2 * size - 1), (n - 1));
 
-            if (mij < dr)
-            {
-                s=st;
-                m=mij + 1;
-                i=st;
+                if (mij < dr) {
+                    s = st;
+                    m = mij + 1;
+                    i = st;
 
-                if(reps%2==0) {
+
                     while (s <= mij && m <= dr) {
                         if (m_numsToSort[s] > m_numsToSort[m]) {
                             m_Numscopy[i++] = m_numsToSort[m];
@@ -50,6 +50,23 @@ void BottomUpMergeSortAlternateVectors::sort() {
                 }
                 else
                 {
+                    for (s = st; s < n; s++) {
+                        m_Numscopy[s] = m_numsToSort[s];
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (st = 0; st < n; st += 2 * size) {
+
+                mij = st + size - 1;
+                dr = std::min((st + 2 * size - 1), (n - 1));
+
+                if (mij < dr) {
+                    s = st;
+                    m = mij + 1;
+                    i = st;
                     while (s <= mij && m <= dr) {
                         if (m_Numscopy[s] > m_Numscopy[m]) {
                             m_numsToSort[i++] = m_Numscopy[m];
@@ -68,19 +85,9 @@ void BottomUpMergeSortAlternateVectors::sort() {
                         m++;
                     }
                 }
-            }
-            else
-            {
-                if(reps%2==0) {
-                    for(s=st;s<n;s++)
-                    {
-                        m_Numscopy[s] = m_numsToSort[s];
-                    }
-                }
                 else
                 {
-                    for(s=st;s<n;s++)
-                    {
+                    for (s = st; s < n; s++) {
                         m_numsToSort[s] = m_Numscopy[s];
                     }
                 }
