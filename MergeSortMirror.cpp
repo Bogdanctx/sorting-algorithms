@@ -76,7 +76,6 @@ void MergeSortMirror::sort(unsigned long long st, unsigned long long dr) {
 }
 
 void MergeSortMirror::begin_benchmark() {
-    std::cout<<'\n';
     startTime = std::chrono::system_clock::now();
     std::cout<<"MergeSortMirror: Begin benchmark\n";
     sort(0, m_numsToSort.size() - 1);
@@ -89,5 +88,7 @@ void MergeSortMirror::begin_benchmark() {
     else {
         std::cout<<"MergeSortMirror: Sorting finished in " << elapsedTime << " seconds.";
     }
-    std::cout<<'\n';
+
+    m_numsToSort.resize(0);
+    m_Numscopy.resize(0);
 }

@@ -6,8 +6,6 @@
 #include "utilities.h"
 
 void NativeSort::begin_benchmark() {
-    std::cout<<'\n';
-
     startTime = std::chrono::system_clock::now();
 
     std::cout<<"Native sort: Begin benchmark\n";
@@ -23,6 +21,4 @@ void NativeSort::begin_benchmark() {
     else {
         std::cout<<"Native sort: Sorting finished in " << elapsedTime << " seconds.";
     }
-
-    std::cout<<'\n';
 }

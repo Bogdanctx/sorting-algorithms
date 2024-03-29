@@ -83,7 +83,6 @@ void TimSort::sort(unsigned long long n) {
 }
 
 void TimSort::begin_benchmark() {
-    std::cout<<'\n';
     startTime = std::chrono::system_clock::now();
     std::cout<<"TimSort: Begin benchmark\n";
     sort(m_numsToSort.size());
@@ -96,6 +95,5 @@ void TimSort::begin_benchmark() {
     else {
         std::cout<<"TimSort: Sorting finished in " << elapsedTime << " seconds.";
     }
-    std::cout<<'\n';
 }
 

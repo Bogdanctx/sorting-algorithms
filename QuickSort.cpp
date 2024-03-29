@@ -80,8 +80,6 @@ void QuickSort::sort(long long int left, long long int right, const QuickSort::p
 void QuickSort::begin_benchmark() {
     bool wasSorted;
 
-    std::cout<<'\n';
-
     m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
 
@@ -93,15 +91,13 @@ void QuickSort::begin_benchmark() {
     wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
-        std::cout<<"Quicksort: Could not sort.\n";
+        std::cout<<"Quicksort: Could not sort.";
     }
     else {
-        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
+        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.";
     }
 
-    std::cout<<'\n';
-
-    std::cout<<'\n';
+    std::cout<<"\n\n";
 
     m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
@@ -114,14 +110,14 @@ void QuickSort::begin_benchmark() {
     wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
-        std::cout<<"Quicksort: Could not sort\n";
+        std::cout<<"Quicksort: Could not sort";
     }
     else {
-        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
+        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.";
     }
-    std::cout<<'\n';
 
-    std::cout<<'\n';
+    std::cout<<"\n\n";
+
     m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
 
@@ -133,11 +129,9 @@ void QuickSort::begin_benchmark() {
     wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
-        std::cout<<"Quicksort: Could not sort\n";
+        std::cout<<"Quicksort: Could not sort";
     }
     else {
-        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.\n";
+        std::cout<<"Quicksort: Sorting finished in " << elapsedTime << " seconds.";
     }
-    std::cout<<'\n';
-
 }

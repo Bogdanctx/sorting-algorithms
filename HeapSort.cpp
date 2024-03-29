@@ -60,8 +60,6 @@ void HeapSort::sort(){
 void HeapSort::begin_benchmark() {
     bool wasSorted;
 
-    std::cout<<"\n";
-
     startTime = std::chrono::system_clock::now();
 
     std::cout<<"HeapSort: Begin benchmark\n";
@@ -78,6 +76,5 @@ void HeapSort::begin_benchmark() {
 
         std::cout<<"HeapSort: Sorting finished in " << elapsedTime << " seconds.";
     }
-    std::cout<<"\n";
 }
 

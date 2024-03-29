@@ -54,7 +54,6 @@ void BottomUpMergeSort::sort() {
 }
 
 void BottomUpMergeSort::begin_benchmark() {
-    std::cout<<'\n';
     startTime = std::chrono::system_clock::now();
     std::cout<<"BottomUpMergeSort: Begin benchmark\n";
     sort();
@@ -67,5 +66,4 @@ void BottomUpMergeSort::begin_benchmark() {
     else {
         std::cout<<"BottomUpMergeSort: Sorting finished in " << elapsedTime << " seconds.";
     }
-    std::cout<<'\n';
 }

@@ -12,8 +12,6 @@ add_executable(sorting-algorithms main.cpp
         NativeSort.cpp
         ShellSort.h
         ShellSort.cpp
-        RadixSort.h
-        RadixSort.cpp
         HeapSort.h
         HeapSort.cpp
         RadixIntSort.h

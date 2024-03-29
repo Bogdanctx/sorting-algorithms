@@ -50,7 +50,6 @@ void MergeSort::sort(unsigned long long st, unsigned long long dr) {
 }
 
 void MergeSort::begin_benchmark() {
-    std::cout<<'\n';
     startTime = std::chrono::system_clock::now();
     std::cout<<"MergeSort: Begin benchmark\n";
     sort(0, m_numsToSort.size() - 1);
@@ -63,5 +62,7 @@ void MergeSort::begin_benchmark() {
     else {
         std::cout<<"MergeSort: Sorting finished in " << elapsedTime << " seconds.";
     }
-    std::cout<<'\n';
+
+    m_numsToSort.resize(0);
+    m_Numscopy.resize(0);
 }

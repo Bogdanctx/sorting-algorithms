@@ -98,7 +98,6 @@ void BottomUpMergeSortAlternateVectors::sort() {
 }
 
 void BottomUpMergeSortAlternateVectors::begin_benchmark() {
-    std::cout<<'\n';
     startTime = std::chrono::system_clock::now();
     std::cout<<"BottomUpMergeSortAlternateVectors: Begin benchmark\n";
     sort();
@@ -111,5 +110,4 @@ void BottomUpMergeSortAlternateVectors::begin_benchmark() {
     else {
         std::cout<<"BottomUpMergeSortAlternateVectors: Sorting finished in " << elapsedTime << " seconds.";
     }
-    std::cout<<'\n';
 }

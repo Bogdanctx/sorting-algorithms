@@ -4,7 +4,6 @@
 #include "QuickSort.h"
 #include "NativeSort.h"
 #include "ShellSort.h"
-#include "RadixSort.h"
 #include "HeapSort.h"
 #include "RadixIntSort.h"
 #include "MergeSort.h"
@@ -22,25 +21,29 @@ int main() {
             {1000, 0, 1000000}, // N=10^3, min=0, max=10^6 0)
             {1000, -1000000, 1000000}, // N=10^4, min=-10^6, max=10^6 1)
             {10000, 0, 1000}, // N=10^5, min=0, max=10^4 2)
-            {100000000, 0, 1000}, // N=10^8, min=0, max=10^3 3)
-            {100000000, -100000, 100000}, // N=10^8, min=-10^5, max=10^5 4)
-            {100000000, 0, 100000000}, // N=10^8, min=0, max=10^8 5)
-            {100000000, 0, 1000000000000}, // N=10^8, min=0, max=10^12 6)
-            {100000000, -1000000000000, 1000000000000}, // N=10^8, min=-10^12, max=10^12 7)
-            {100000000, 0, 10000000000000000}, // N=10^8, min=0, max=10^16 8)
-            {100000000, -10000000000000000, 10000000000000000}, // N=10^8, min=-10^16, max=10^16 9)
+            {100000, -100000, 100000}, // N=10^6, min=-10^6, max=10^6 3)
+            {1000000, 0, 10000000}, // N=10^7, min=0, max=10^7 4)
+            {100000000, 0, 1000}, // N=10^8, min=0, max=10^3 5)
+            {100000000, -100000, 100000}, // N=10^8, min=-10^5, max=10^5 6)
+            {100000000, 0, 100000000}, // N=10^8, min=0, max=10^8 7)
+            {100000000, 0, 1000000000000}, // N=10^8, min=0, max=10^12 8)
+            {100000000, -1000000000000, 1000000000000}, // N=10^8, min=-10^12, max=10^12 9)
+            {100000000, 0, 10000000000000000}, // N=10^8, min=0, max=10^16 10)
+            {100000000, -10000000000000000, 10000000000000000}, // N=10^8, min=-10^16, max=10^16 11)
     };
     const std::vector<std::string> testInfo = {
             "N=10^3, min=0, max=10^6", // 0
             "N=10^4, min=-10^6, max=10^6", // 1
             "N=10^5, min=0, max=10^4", // 2
-            "N=10^8, min=0, max=10^3", // 3
-            "N=10^8, min=-10^5, max=10^5", // 4
-            "N=10^8, min=0, max=10^8", // 5
-            "N=10^8, min=0, max=10^12", // 6
-            "N=10^8, min=-10^12, max=10^12", // 7
-            "N=10^8, min=0, max=10^16", // 8
-            "N=10^8, min=-10^16, max=10^16", // 9
+            "N=10^6, min=-10^6, max=10^6", // 3
+            "N=10^7, min=0, max=10^7", // 4
+            "N=10^8, min=0, max=10^3", // 5
+            "N=10^8, min=-10^5, max=10^5", // 6
+            "N=10^8, min=0, max=10^8", // 7
+            "N=10^8, min=0, max=10^12", // 8
+            "N=10^8, min=-10^12, max=10^12", // 9
+            "N=10^8, min=0, max=10^16", // 10
+            "N=10^8, min=-10^16, max=10^16", // 11
     };
 
     int numberOfTests = (int) tests.size();
@@ -61,59 +64,79 @@ int main() {
         std::cout<<"Done.\n\n";
 
         std::cout<<"############################################\n";
-        std::cout<<"Test #"<<test<< " (" << testInfo[test] << ") benchmarks:\n";
+        std::cout<<"Test #"<<test<< " (" << testInfo[test] << ") benchmarks:\n\n";
 
         // Aici punem algoritmii de sortare
 
-        QuickSort quickSort{nums};
-        quickSort.begin_benchmark();
+        QuickSort *quickSort = new QuickSort{nums};
+        quickSort->begin_benchmark();
+        delete quickSort;
 
-        std::cout<<'\n';
+        std::cout<<"\n\n";
 
+        NativeSort *nativeSort = new NativeSort{nums};
+        nativeSort->begin_benchmark();
+        delete nativeSort;
 
-        NativeSort nativeSort{nums};
-        nativeSort.begin_benchmark();
+        std::cout<<"\n\n";
 
-        std::cout<<'\n';
-
-        ShellSort shellSort{nums};
-        shellSort.begin_benchmark();
+        ShellSort *shellSort = new ShellSort{nums};
+        shellSort->begin_benchmark();
+        delete shellSort;
 
         ///////////////
 
-        std::cout<<'\n';
+        std::cout<<"\n\n";
 
-        HeapSort heapsort{nums};
-        heapsort.begin_benchmark();
+        HeapSort *heapsort = new HeapSort{nums};
+        heapsort->begin_benchmark();
+        delete heapsort;
 
-        std::cout<<'\n';
-        Radix_Int_Sort radixintsort{nums};
-        radixintsort.begin_benchmark();
+        std::cout<<"\n\n";
 
-        std::cout<<"\n";
+        Radix_Int_Sort *radixintsort = new Radix_Int_Sort{nums};
+        radixintsort->begin_benchmark();
+        delete radixintsort;
 
-        Radix_Sort radixSort{nums};
-        radixSort.begin_benchmark();
+        std::cout<<"\n\n";
 
         ////////////////
 
-        MergeSort mergesort{nums};
-        mergesort.begin_benchmark();
+        MergeSort *mergesort = new MergeSort{nums};
+        mergesort->begin_benchmark();
+        delete mergesort;
 
-        BottomUpMergeSort bottomupmergesort{nums};
-        bottomupmergesort.begin_benchmark();
+        std::cout<<"\n\n";
 
-        BottomUpMergeSortAlternateVectors bottomupmergesortalternatevectors{nums};
-        bottomupmergesortalternatevectors.begin_benchmark();
+        BottomUpMergeSort *bottomupmergesort = new BottomUpMergeSort{nums};
+        bottomupmergesort->begin_benchmark();
+        delete bottomupmergesort;
 
-        MergeSortIfState mergesortifstate{nums};
-        mergesortifstate.begin_benchmark();
+        std::cout<<"\n\n";
 
-        MergeSortMirror mergesortmirror{nums};
-        mergesortmirror.begin_benchmark();
+        BottomUpMergeSortAlternateVectors *bottomupmergesortalternatevectors = new BottomUpMergeSortAlternateVectors{nums};
+        bottomupmergesortalternatevectors->begin_benchmark();
+        delete bottomupmergesortalternatevectors;
 
-        TimSort timsort{nums};
-        timsort.begin_benchmark();
+        std::cout<<"\n\n";
+
+        MergeSortIfState *mergesortifstate = new MergeSortIfState{nums};
+        mergesortifstate->begin_benchmark();
+        delete mergesortifstate;
+
+        std::cout<<"\n\n";
+
+        MergeSortMirror *mergesortmirror = new MergeSortMirror{nums};
+        mergesortmirror->begin_benchmark();
+        delete mergesortmirror;
+
+        std::cout<<"\n\n";
+
+        TimSort *timsort = new TimSort{nums};
+        timsort->begin_benchmark();
+        delete timsort;
+
+        std::cout<<"\n\n";
 
         std::cout<<"############################################";
         std::cout<<"\n\n";

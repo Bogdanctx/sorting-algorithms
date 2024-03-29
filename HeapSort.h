@@ -11,7 +11,7 @@
 
 class HeapSort{
 public:
-    explicit HeapSort(const std::vector<long long int> nums) : m_numsToSort(nums) {};
+    explicit HeapSort(const std::vector<long long int> &nums) : m_numsToSort(nums) {};
     void heapify_down(long long int i, long long int n);
     void build_max_heap();
     void begin_benchmark();

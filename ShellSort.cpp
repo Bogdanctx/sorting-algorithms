@@ -26,8 +26,6 @@ void ShellSort::sort() {
 }
 
 void ShellSort::begin_benchmark() {
-    std::cout<<'\n';
-
     startTime = std::chrono::system_clock::now();
 
     std::cout<<"Shellsort: Begin benchmark\n";
@@ -43,6 +41,4 @@ void ShellSort::begin_benchmark() {
     else {
         std::cout<<"Shellsort: Sorting finished in " << elapsedTime << " seconds.";
     }
-
-    std::cout<<'\n';
 }

@@ -64,7 +64,6 @@ void MergeSortIfState::sort(unsigned long long st, unsigned long long dr,bool st
 }
 
 void MergeSortIfState::begin_benchmark() {
-    std::cout<<'\n';
     startTime = std::chrono::system_clock::now();
     std::cout<<"MergeSortIfState: Begin benchmark\n";
     sort(0, m_numsToSort.size() - 1);
@@ -77,5 +76,7 @@ void MergeSortIfState::begin_benchmark() {
     else {
         std::cout<<"MergeSortIfState: Sorting finished in " << elapsedTime << " seconds.";
     }
-    std::cout<<'\n';
+
+    m_numsToSort.resize(0);
+    m_Numscopy.resize(0);
 }

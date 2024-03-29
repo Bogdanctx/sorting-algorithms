@@ -60,8 +60,6 @@ void Radix_Sort::sort(int base) {
 void Radix_Sort::begin_benchmark() {
     bool wasSorted;
 
-    std::cout<<'\n';
-
     m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
 
@@ -82,9 +80,6 @@ void Radix_Sort::begin_benchmark() {
     }
     std::cout<<'\n';
 
-
-    std::cout<<'\n';
-
     m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
 
@@ -101,7 +96,4 @@ void Radix_Sort::begin_benchmark() {
     else {
         std::cout<<"Radix_Sort: Sorting finished in " << elapsedTime << " seconds.";
     }
-
-    std::cout<<'\n';
-
 }

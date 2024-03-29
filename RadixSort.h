@@ -13,7 +13,7 @@
 
 class Radix_Sort {
 public:
-    explicit Radix_Sort(const std::vector<long long int> nums) : m_Nums(nums), m_numsToSort(nums) {};
+    explicit Radix_Sort(const std::vector<long long int> &nums) : m_Nums(nums), m_numsToSort(nums) {};
     unsigned long long int getMax(std::vector<unsigned long long int>& arr);
     void countingSort(std::vector<unsigned long long int> &nums, int base, unsigned long long int exp);
 

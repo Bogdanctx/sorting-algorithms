@@ -62,8 +62,6 @@ void Radix_Int_Sort::sort(int base) {
 void Radix_Int_Sort::begin_benchmark() {
     bool wasSorted;
 
-    std::cout<<'\n';
-
     m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
 
@@ -75,22 +73,19 @@ void Radix_Int_Sort::begin_benchmark() {
     wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
-        std::cout<<"Radix_Int_Sort: Could not sort.";
+        std::cout<<"Radix_Sort: Could not sort.";
     }
     else {
-        std::cout<<"Radix_Int_Sort: Sorting finished in " << elapsedTime << " seconds.";
+        std::cout<<"Radix_Sort: Sorting finished in " << elapsedTime << " seconds.";
         //std::cout<<"\n"<<m_numsToSort[m_numsToSort.size()-1];
 
     }
-    std::cout<<'\n';
-
-
-    std::cout<<'\n';
+    std::cout<<"\n\n";
 
     m_numsToSort = std::vector<long long int>(m_Nums);
     startTime = std::chrono::system_clock::now();
 
-    std::cout<<"Radix_Int_Sort: Begin benchmark (base = 2^16)\n";
+    std::cout<<"Radix_Sort: Begin benchmark (base = 2^16)\n";
 
     sort(65536);
 
@@ -98,11 +93,9 @@ void Radix_Int_Sort::begin_benchmark() {
     wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
-        std::cout<<"Radix_Int_Sort: Could not sort";
+        std::cout<<"Radix_Sort: Could not sort";
     }
     else {
-        std::cout<<"Radix_Int_Sort: Sorting finished in " << elapsedTime << " seconds.";
+        std::cout<<"Radix_Sort: Sorting finished in " << elapsedTime << " seconds.";
     }
-    std::cout<<'\n';
-
 }
