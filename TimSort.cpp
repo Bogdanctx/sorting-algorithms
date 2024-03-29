@@ -27,9 +27,14 @@ void TimSort::merge(unsigned long long st, unsigned long long mij, unsigned long
     unsigned long long i=st;
     while(s<=mij && m <=dr)
     {
-        if(Utilities::isTle(startTime)) {
+        /*if(Utilities::isTle(startTime)) {
             return;
         }
+        if(m_numsToSort[s]>1e8)
+            std::cout<< s << " " << m_numsToSort[s] <<" how  s?\n";
+        if(m_numsToSort[m]>1e8)
+            std::cout<< m << " " << m_numsToSort[m] <<" how  m?\n";
+            */
         if(m_numsToSort[s]>m_numsToSort[m])
         {
             m_Numscopy[i++]=m_numsToSort[m];
@@ -63,9 +68,9 @@ void TimSort::sort(unsigned long long n) {
         InsertionSort( i, std::min((i + runsize - 1), (n - 1)));
 
     for (unsigned long long size = runsize; size < n; size = 2 * size) {
-        if(Utilities::isTle(startTime)) {
+        /*if(Utilities::isTle(startTime)) {
             return;
-        }
+        }*/
         for (unsigned long long st = 0; st < n; st += 2 * size) {
 
             unsigned long long mij = st + size - 1;
@@ -97,6 +102,7 @@ void TimSort::begin_benchmark() {
 bool TimSort::verifySort() {
     for(int i = 1; i < m_numsToSort.size(); i++) {
         if(m_numsToSort[i] < m_numsToSort[i-1]) {
+            std::cout << i-1 << " " << i << " " << m_numsToSort[i - 1] << " " << m_numsToSort[i] << std::endl;
             return false;
         }
     }

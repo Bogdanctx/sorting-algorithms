@@ -19,9 +19,9 @@ void MergeSort::sort(unsigned long long st, unsigned long long dr) {
     unsigned long long i=st;
     while(s<=mij && m <=dr)
     {
-        if(Utilities::isTle(startTime)) {
+        /*if(Utilities::isTle(startTime)) {
             return;
-        }
+        }*/
         if(m_numsToSort[s]>m_numsToSort[m])
         {
             m_Numscopy[i++]=m_numsToSort[m];
@@ -69,6 +69,7 @@ void MergeSort::begin_benchmark() {
 bool MergeSort::verifySort() {
     for(int i = 1; i < m_numsToSort.size(); i++) {
         if(m_numsToSort[i] < m_numsToSort[i-1]) {
+            std::cout << i-1 << " " << i << " " << m_numsToSort[i - 1] << " " << m_numsToSort[i] << std::endl;
             return false;
         }
     }
