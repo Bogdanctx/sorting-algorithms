@@ -26,4 +26,6 @@ add_executable(sorting-algorithms main.cpp
         MergeSortIfState.h
         BottomUpMergeSort.cpp
         BottomUpMergeSort.h
+        BottomUpMergeSortAlternateVectors.cpp
+        BottomUpMergeSortAlternateVectors.h
         utilities.h)

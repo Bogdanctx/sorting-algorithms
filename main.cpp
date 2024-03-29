@@ -12,6 +12,7 @@
 #include "MergeSortMirror.h"
 #include "MergeSortIfState.h"
 #include "BottomUpMergeSort.h"
+#include "BottomUpMergeSortAlternateVectors.h"
 
 #include "random.hpp"
 
@@ -101,6 +102,9 @@ int main() {
 
         BottomUpMergeSort bottomupmergesort{nums};
         bottomupmergesort.begin_benchmark();
+
+        BottomUpMergeSortAlternateVectors bottomupmergesortalternatevectors{nums};
+        bottomupmergesortalternatevectors.begin_benchmark();
 
         MergeSortIfState mergesortifstate{nums};
         mergesortifstate.begin_benchmark();
