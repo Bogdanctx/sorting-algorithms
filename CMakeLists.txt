@@ -18,4 +18,6 @@ add_executable(sorting-algorithms main.cpp
         HeapSort.cpp
         RadixIntSort.h
         RadixIntSort.cpp
+        TimSort.h
+        TimSort.cpp
         utilities.h)

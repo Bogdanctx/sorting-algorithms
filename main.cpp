@@ -9,6 +9,7 @@
 #include "HeapSort.h"
 #include "RadixIntSort.h"
 #include "MergeSort.h"
+#include "TimSort.h"
 
 #include "random.hpp"
 
@@ -87,6 +88,9 @@ int main() {
 
         MergeSort mergesort{nums};
         mergesort.begin_benchmark();
+
+        TimSort timsort{nums};
+        timsort.begin_benchmark();
 
         std::cout<<"############################################";
         std::cout<<"\n\n";
