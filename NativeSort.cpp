@@ -5,15 +5,6 @@
 #include "NativeSort.h"
 #include "utilities.h"
 
-bool NativeSort::verifySort() {
-    for(int i = 1; i < m_numsToSort.size(); i++) {
-        if(m_numsToSort[i] < m_numsToSort[i-1]) {
-            return false;
-        }
-    }
-    return true;
-}
-
 void NativeSort::begin_benchmark() {
     std::cout<<'\n';
 
@@ -24,7 +15,7 @@ void NativeSort::begin_benchmark() {
     std::sort(m_numsToSort.begin(), m_numsToSort.end());
 
     elapsedTime = Utilities::getElapsedSeconds(startTime);
-    bool wasSorted = verifySort();
+    bool wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
         std::cout<<"Native sort: Could not sort.";

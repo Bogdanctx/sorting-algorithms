@@ -6,15 +6,15 @@
 #include "utilities.h"
 
 void ShellSort::sort() {
-    int n = m_numsToSort.size();
-    for(int gap = n / 2; gap > 0; gap = gap / 2) {
+    long long int n = m_numsToSort.size();
+    for(long long int gap = n / 2; gap > 0; gap = gap / 2) {
         if(Utilities::isTle(startTime)) {
             return;
         }
 
-        for(int i = gap; i < n; i++) {
+        for(long long int i = gap; i < n; i++) {
             long long int temp = m_numsToSort[i];
-            int j;
+            long long int j;
 
             for(j = i; j >= gap && m_numsToSort[j-gap] > temp; j -= gap) {
                 m_numsToSort[j] = m_numsToSort[j - gap];
@@ -36,7 +36,7 @@ void ShellSort::begin_benchmark() {
 
     elapsedTime = Utilities::getElapsedSeconds(startTime);
 
-    bool wasSorted = verifySort();
+    bool wasSorted = Utilities::isSorted(m_numsToSort);
     if(!wasSorted) {
         std::cout<<"Shellsort: Could not sort.";
     }
@@ -45,13 +45,4 @@ void ShellSort::begin_benchmark() {
     }
 
     std::cout<<'\n';
-}
-
-bool ShellSort::verifySort() {
-    for(int i = 1; i < m_numsToSort.size(); i++) {
-        if(m_numsToSort[i] < m_numsToSort[i-1]) {
-            return false;
-        }
-    }
-    return true;
 }

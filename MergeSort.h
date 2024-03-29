@@ -21,7 +21,6 @@ public:
 
 private:
     void sort(unsigned long long st, unsigned long long dr);
-    bool verifySort();
 
     std::vector<long long int> m_numsToSort;
     std::vector<long long int> m_Numscopy;

@@ -56,7 +56,7 @@ void MergeSort::begin_benchmark() {
     sort(0, m_numsToSort.size() - 1);
     endTime = std::chrono::system_clock::now();
     elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
-    bool wasSorted = verifySort();
+    bool wasSorted = Utilities::isSorted(m_numsToSort);
     if(!wasSorted) {
         std::cout<<"MergeSort: Could not sort.";
     }
@@ -64,14 +64,4 @@ void MergeSort::begin_benchmark() {
         std::cout<<"MergeSort: Sorting finished in " << elapsedTime << " seconds.";
     }
     std::cout<<'\n';
-}
-
-bool MergeSort::verifySort() {
-    for(int i = 1; i < m_numsToSort.size(); i++) {
-        if(m_numsToSort[i] < m_numsToSort[i-1]) {
-            std::cout << i-1 << " " << i << " " << m_numsToSort[i - 1] << " " << m_numsToSort[i] << std::endl;
-            return false;
-        }
-    }
-    return true;
 }

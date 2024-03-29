@@ -5,22 +5,15 @@
 #include "HeapSort.h"
 #include "utilities.h"
 
-bool HeapSort::verifySort() {
-    for(int i = 1; i < m_numsToSort.size(); i++) {
-        if(m_numsToSort[i] < m_numsToSort[i-1]) {
-            return false;
-        }
-    }
-    return true;
-}
-void HeapSort::heapify_down(int i, int n) {
+
+void HeapSort::heapify_down(long long int i, long long int n) {
     if(Utilities::isTle(startTime)) {
         return;
     }
 
-    int largest = i;
-    int left_child = 2 * i + 1;
-    int right_child = 2 * i + 2;
+    long long int largest = i;
+    long long int left_child = 2 * i + 1;
+    long long int right_child = 2 * i + 2;
 
     // Compare with left child
     if (left_child < n && m_numsToSort[left_child] > m_numsToSort[largest])
@@ -38,9 +31,9 @@ void HeapSort::heapify_down(int i, int n) {
 }
 
 void HeapSort::build_max_heap() {
-    int n = m_numsToSort.size();
+    long long int n = m_numsToSort.size();
     // Start from the last non-leaf node
-    for (int i = n / 2 - 1; i >= 0; i--) {
+    for (long long int i = n / 2 - 1; i >= 0; i--) {
         if(Utilities::isTle(startTime)) {
             return;
         }
@@ -52,9 +45,9 @@ void HeapSort::build_max_heap() {
 void HeapSort::sort(){
     build_max_heap();
 
-    int n = m_numsToSort.size();
+    long long int n = m_numsToSort.size();
     // Extract elements from the heap in sorted order
-    for (int i = n - 1; i > 0; i--) {
+    for (long long int i = n - 1; i > 0; i--) {
         if(Utilities::isTle(startTime)) {
             return;
         }
@@ -75,8 +68,8 @@ void HeapSort::begin_benchmark() {
 
     sort();
 
-    elapsedTime =
-    wasSorted = verifySort();
+    elapsedTime = Utilities::getElapsedSeconds(startTime);
+    wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
         std::cout<<"HeapSort: Could not sort.";
