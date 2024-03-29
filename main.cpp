@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 
 #include "QuickSort.h"
@@ -15,26 +14,30 @@
 int main() {
     // (size, nr_minim, nr_maxim)
     const std::vector<std::vector<long long int>> tests = {
-            {100000000, 0, 100000000}, // N=10^8, min = 0, max=10^8
-            {100000000, 0, 1000}, // N=10^8, min = 0, max=10^3
-            {1000, 0, 1000000}, // N=10^3, min = 0, max=10^6
-            {100000000, -100000, 100000}, // N=10^8, min=-10^5, max=10^5
-            {100000000, 0, 1000000000000}, // N=10^8, min=0, max=10^12
+            {100000000, 0, 100000000}, // N=10^8, min = 0, max=10^8 0)
+            {100000000, 0, 1000}, // N=10^8, min = 0, max=10^3 1)
+            {1000, 0, 1000000}, // N=10^3, min = 0, max=10^6 2)
+            {100000000, -100000, 100000}, // N=10^8, min=-10^5, max=10^5 3)
+            {100000000, 0, 1000000000000}, // N=10^8, min=0, max=10^12 4)
+            {100000000, 0, 10000000000000000}, // N=10^8, min=0, max=10^16 5)
+            {100000000, -1000000000000, 1000000000000}, // N=10^8, min=-10^12, max=10^12 6)
+            {1000000000000, 0, 1000000} // N=10^12, min=0, max=10^6
     };
     const std::vector<std::string> testInfo = {
-        "N=10^8 | max=10^8",
-        "N=10^8 | max=10^3",
-        "N=10^3 | max=10^6",
-        "N=10^8 | max=10^5, min=-10^5",
-        "N=10^8 | max=10^12",
+        "N=10^8, max=10^8",
+        "N=10^8, max=10^3",
+        "N=10^3, max=10^6",
+        "N=10^8, max=10^5, min=-10^5",
+        "N=10^8, max=10^12",
+        "N=10^8, min=0, max=10^16",
+        "N=10^8, min=-10^12, max=10^12"
     };
 
     int numberOfTests = (int) tests.size();
     const int specialTest = numberOfTests - 1; // testul cu id-ul cel mai mare va fi cel cu float-uri
 
     for(int test = 0; test < numberOfTests; test++) {
-
-        int n = tests[test][0];
+        long long int n = tests[test][0];
         long long int lowerBound = tests[test][1];
         long long int upperBound = tests[test][2];
 
@@ -42,7 +45,7 @@ int main() {
 
         std::cout<<"Creating test #" << test << " input\n";
 
-        for(int p = 0; p < n; p++) {
+        for(long long int p = 0; p < n; p++) {
             nums[p] = effolkronium::random_static::get(lowerBound, upperBound);
         }
 

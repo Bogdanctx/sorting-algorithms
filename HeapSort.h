@@ -12,13 +12,11 @@
 class HeapSort{
 public:
     explicit HeapSort(const std::vector<long long int> nums) : m_numsToSort(nums) {};
-    void heapify_down(int i, int n);
+    void heapify_down(long long int i, long long int n);
     void build_max_heap();
     void begin_benchmark();
 
 private:
-
-    bool verifySort();
     void sort();
     std::vector<long long int> m_numsToSort;
     std::chrono::system_clock::time_point startTime;

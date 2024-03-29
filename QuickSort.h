@@ -16,7 +16,7 @@ class QuickSort {
 public:
     explicit QuickSort(const std::vector<long long int> &nums) : m_Nums(nums), m_numsToSort(nums) {};
 
-    static int partition(int left, int right, std::vector<long long int> &nums);
+    static long long int partition(long long int left, long long int right, std::vector<long long int> &nums);
 
     void begin_benchmark();
 
@@ -27,8 +27,7 @@ private:
         pt_Mediana3 = 3
     };
 
-    bool verifySort();
-    void sort(int left, int right, pivotTypes pt);
+    void sort(long long int left, long long int right, pivotTypes pt);
     const std::vector<long long int> m_Nums;
     std::vector<long long int> m_numsToSort;
     std::chrono::system_clock::time_point startTime;

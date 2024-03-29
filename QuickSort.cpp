@@ -5,20 +5,11 @@
 #include "QuickSort.h"
 #include "utilities.h"
 
-bool QuickSort::verifySort() {
-    for(int i = 1; i < m_numsToSort.size(); i++) {
-        if(m_numsToSort[i] < m_numsToSort[i-1]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-int QuickSort::partition(const int left, const int right, std::vector<long long int> &nums) {
-    int i = left - 1;
+long long int QuickSort::partition(const long long int left, const long long int right, std::vector<long long int> &nums) {
+    long long int i = left - 1;
     long long int pivot = nums[right];
 
-    for(int j = left; j <= right - 1; j++) {
+    for(long long int j = left; j <= right - 1; j++) {
         if(nums[j] <= pivot) {
             ++i;
             std::swap(nums[i], nums[j]);
@@ -30,8 +21,8 @@ int QuickSort::partition(const int left, const int right, std::vector<long long 
     return i;
 }
 
-void QuickSort::sort(int left, int right, const QuickSort::pivotTypes pt) {
-    std::stack<std::pair<int, int>> st;
+void QuickSort::sort(long long int left, long long int right, const QuickSort::pivotTypes pt) {
+    std::stack<std::pair<long long int, long long int>> st;
 
     st.emplace(left, right);
 
@@ -41,7 +32,7 @@ void QuickSort::sort(int left, int right, const QuickSort::pivotTypes pt) {
             return;
         }
 
-        const std::pair<int, int> stackTop = st.top();
+        const std::pair<long long int, long long int> stackTop = st.top();
         st.pop();
         left = stackTop.first;
         right = stackTop.second;
@@ -55,7 +46,7 @@ void QuickSort::sort(int left, int right, const QuickSort::pivotTypes pt) {
         switch (pt) {
             case pivotTypes::pt_Random:
             {
-                pivotIndex = left + effolkronium::random_static::get(0, right-left);
+                pivotIndex = left + effolkronium::random_static::get( (long long int)0, right-left);
                 std::swap(m_numsToSort[right], m_numsToSort[pivotIndex]);
                 break;
             }
@@ -79,7 +70,7 @@ void QuickSort::sort(int left, int right, const QuickSort::pivotTypes pt) {
                 break;
         }
 
-        int part = partition(left, right, m_numsToSort);
+        long long int part = partition(left, right, m_numsToSort);
 
         st.emplace(left, part - 1);
         st.emplace(part + 1, right);
@@ -96,10 +87,10 @@ void QuickSort::begin_benchmark() {
 
     std::cout<<"Quicksort: Begin benchmark (pivot = random)\n";
 
-    sort(0, (int) m_numsToSort.size() - 1, pivotTypes::pt_Random);
+    sort(0, m_numsToSort.size() - 1, pivotTypes::pt_Random);
 
     elapsedTime = Utilities::getElapsedSeconds(startTime);
-    wasSorted = verifySort();
+    wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
         std::cout<<"Quicksort: Could not sort.\n";
@@ -117,10 +108,10 @@ void QuickSort::begin_benchmark() {
 
     std::cout<<"Quicksort: Begin benchmark (pivot = mediana din 3)\n";
 
-    sort(0, (int) m_numsToSort.size() - 1, pivotTypes::pt_Mediana3);
+    sort(0, m_numsToSort.size() - 1, pivotTypes::pt_Mediana3);
 
     elapsedTime = Utilities::getElapsedSeconds(startTime);
-    wasSorted = verifySort();
+    wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
         std::cout<<"Quicksort: Could not sort\n";
@@ -136,10 +127,10 @@ void QuickSort::begin_benchmark() {
 
     std::cout<<"Quicksort: Begin benchmark (pivot = elementul din dreapta)\n";
 
-    sort(0, (int) m_numsToSort.size() - 1, pivotTypes::pt_Rightest);
+    sort(0, m_numsToSort.size() - 1, pivotTypes::pt_Rightest);
 
     elapsedTime = Utilities::getElapsedSeconds(startTime);
-    wasSorted = verifySort();
+    wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
         std::cout<<"Quicksort: Could not sort\n";

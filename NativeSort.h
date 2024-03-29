@@ -17,8 +17,6 @@ public:
     void begin_benchmark();
 
 private:
-    bool verifySort();
-
     std::vector<long long int> m_numsToSort;
     std::chrono::system_clock::time_point startTime;
     int elapsedTime;

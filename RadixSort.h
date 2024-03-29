@@ -21,7 +21,6 @@ public:
 
 private:
 
-    bool verifySort();
     void sort(int base);
     const std::vector<long long int> m_Nums;
     std::vector<long long int> m_numsToSort;

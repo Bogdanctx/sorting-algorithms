@@ -4,6 +4,7 @@
 
 
 #include "MergeSort.h"
+#include "utilities.h"
 
 
 void MergeSort::sort(unsigned long long st, unsigned long long dr) {
@@ -52,7 +53,7 @@ void MergeSort::begin_benchmark() {
     sort(0, getn() - 1);
     endTime = std::chrono::system_clock::now();
     elapsedTime = (int) std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
-    bool wasSorted = verifySort();
+    bool wasSorted = Utilities::isSorted(m_numsToSort);
     if(!wasSorted) {
         std::cout<<"MergeSort: Could not sort.";
     }
@@ -60,13 +61,4 @@ void MergeSort::begin_benchmark() {
         std::cout<<"MergeSort: Sorting finished in " << elapsedTime << " seconds.";
     }
     std::cout<<'\n';
-}
-
-bool MergeSort::verifySort() {
-    for(int i = 1; i < m_numsToSort.size(); i++) {
-        if(m_numsToSort[i] < m_numsToSort[i-1]) {
-            return false;
-        }
-    }
-    return true;
 }

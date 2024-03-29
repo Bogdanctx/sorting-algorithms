@@ -5,17 +5,10 @@
 #include "RadixIntSort.h"
 #include "utilities.h"
 
-bool Radix_Int_Sort::verifySort() {
-    for(int i = 1; i < m_numsToSort.size(); i++) {
-        if(m_numsToSort[i] < m_numsToSort[i-1]) {
-            return false;
-        }
-    }
-    return true;
-}
+
 long long int Radix_Int_Sort::getMin(std::vector<long long int>& arr){
     long long int min = arr[0];
-    for (int i = 1; i < arr.size(); i++) {
+    for (long long int i = 1; i < arr.size(); i++) {
         if (arr[i] < min) {
             min = arr[i];
         }
@@ -25,7 +18,7 @@ long long int Radix_Int_Sort::getMin(std::vector<long long int>& arr){
 long long int Radix_Int_Sort::getMaxPlusNormalize(std::vector<long long> &arr,long long int min) {
     long long int max = arr[0]-min;
     arr[0]=arr[0]-min;
-    for (int i = 1; i < arr.size(); i++) {
+    for (long long int i = 1; i < arr.size(); i++) {
         arr[i]=arr[i]-min;
         if (arr[i] > max) {
             max = arr[i];
@@ -42,7 +35,7 @@ void Radix_Int_Sort::countingSort(std::vector<long long int>& arr, int base, uns
     for (int i = 1; i < base; i++) {
         count[i] += count[i - 1];
     }
-    for (int i = arr.size() - 1; i >= 0; i--) {
+    for (long long int i = arr.size() - 1; i >= 0; i--) {
         output[count[(arr[i] / exp) % base] - 1] = arr[i];
         count[(arr[i] / exp) % base]--;
     }
@@ -54,7 +47,7 @@ void Radix_Int_Sort::countingSort(std::vector<long long int>& arr, int base, uns
 void Radix_Int_Sort::sort(int base) {
     long long int min = getMin(m_numsToSort);
     long long int max=getMaxPlusNormalize(m_numsToSort,min);
-    for (long long int exp = 1; max / exp > 0; exp *= base) {
+    for (long long int exp = 1; exp != 0 && max / exp > 0; exp *= base) {
 
         if(Utilities::isTle(startTime)) {
             return;
@@ -79,7 +72,7 @@ void Radix_Int_Sort::begin_benchmark() {
     sort(10);
 
     elapsedTime = Utilities::getElapsedSeconds(startTime);
-    wasSorted = verifySort();
+    wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
         std::cout<<"Radix_Int_Sort: Could not sort.";
@@ -102,7 +95,7 @@ void Radix_Int_Sort::begin_benchmark() {
     sort(65536);
 
     elapsedTime = Utilities::getElapsedSeconds(startTime);
-    wasSorted = verifySort();
+    wasSorted = Utilities::isSorted(m_numsToSort);
 
     if(!wasSorted) {
         std::cout<<"Radix_Int_Sort: Could not sort";
