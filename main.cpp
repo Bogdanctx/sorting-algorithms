@@ -7,6 +7,7 @@
 #include "ShellSort.h"
 #include "RadixSort.h"
 #include "HeapSort.h"
+#include "RadixIntSort.h"
 
 #include "random.hpp"
 int main() {
@@ -91,6 +92,10 @@ int main() {
         heapsort.begin_benchmark();
 
         std::cout<<'\n';
+        Radix_Int_Sort radixintsort{nums};
+        radixintsort.begin_benchmark();
+
+        std::cout<<"\n";
 
         Radix_Sort radixSort{nums};
         radixSort.begin_benchmark();
