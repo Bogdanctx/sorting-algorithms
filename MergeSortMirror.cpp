@@ -52,9 +52,6 @@ void MergeSortMirror::sort(unsigned long long st, unsigned long long dr) {
     unsigned long long i=st;
     while(s<=mij && m <=dr)
     {
-        /*if(Utilities::isTle(startTime)) {
-            return;
-        }*/
         if(m_Numscopy[s]>m_Numscopy[m])
         {
             m_numsToSort[i++]=m_Numscopy[m];

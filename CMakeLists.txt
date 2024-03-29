@@ -22,4 +22,6 @@ add_executable(sorting-algorithms main.cpp
         TimSort.cpp
         MergeSortMirror.cpp
         MergeSortMirror.h
+        MergeSortIfState.cpp
+        MergeSortIfState.h
         utilities.h)

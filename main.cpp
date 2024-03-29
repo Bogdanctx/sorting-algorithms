@@ -10,6 +10,7 @@
 #include "MergeSort.h"
 #include "TimSort.h"
 #include "MergeSortMirror.h"
+#include "MergeSortIfState.h"
 
 #include "random.hpp"
 
@@ -92,6 +93,9 @@ int main() {
 
         MergeSort mergesort{nums};
         mergesort.begin_benchmark();
+
+        MergeSortIfState mergesortifstate{nums};
+        mergesortifstate.begin_benchmark();
 
         MergeSortMirror mergesortmirror{nums};
         mergesortmirror.begin_benchmark();
