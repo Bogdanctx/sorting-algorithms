@@ -8,8 +8,10 @@
 #include "RadixSort.h"
 #include "HeapSort.h"
 #include "RadixIntSort.h"
+#include "MergeSort.h"
 
 #include "random.hpp"
+
 int main() {
     const std::vector<std::string> tests = {
         "../test0.txt",
@@ -99,6 +101,11 @@ int main() {
 
         Radix_Sort radixSort{nums};
         radixSort.begin_benchmark();
+
+        ////////////////
+
+        MergeSort mergesort{nums};
+        mergesort.begin_benchmark();
 
         std::cout<<"############################################";
         std::cout<<"\n\n";
